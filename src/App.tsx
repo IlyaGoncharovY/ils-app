@@ -6,10 +6,10 @@ import {RouteMap} from "./components/routeMap/RouteMap";
 
 function App() {
 
-    const [selectedRoute, setSelectedRoute] = useState<RouteData | null>(null);
+    const [selectedRoute, setSelectedRoute] = useState<RouteData | null>(null)
 
     const handleRouteSelection = (route: RouteData) => {
-        setSelectedRoute(route);
+        setSelectedRoute(route)
     };
 
     return (

@@ -36,7 +36,6 @@ export const TableForCoordinates:FC<ITableForCoordinates> = ({onRouteSelection, 
     ]
 
     const dataSource: RouteData[] = [
-        // your route data
         {
             key: '1',
             name: 'Маршрут №1',

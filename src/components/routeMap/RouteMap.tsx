@@ -23,7 +23,7 @@ export const RouteMap: React.FC<IRouteMap> = ({ selectedRoute }) => {
     const routeStyle = {
         color: 'blue',
         weight: 2,
-    };
+    }
 
     return (
         <div>
