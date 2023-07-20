@@ -1,6 +1,6 @@
 import React from 'react';
-import { MapContainer, Marker, Polyline, TileLayer } from 'react-leaflet';
-import {LatLngExpression, LatLngTuple} from 'leaflet';
+import {MapContainer, Marker, Polyline, TileLayer, useMap} from 'react-leaflet';
+import {latLng, latLngBounds, LatLngBoundsExpression, LatLngExpression, LatLngTuple} from 'leaflet';
 import {RouteData} from "../table/TableForCoordinates";
 
 interface IRouteMap {
@@ -25,14 +25,27 @@ export const RouteMap: React.FC<IRouteMap> = ({ selectedRoute }) => {
         weight: 2,
     }
 
+    const AdjustMapView = () => {
+        const map = useMap()
+        if (routeCoords && routeCoords.length > 0) {
+            const bounds = latLngBounds(routeCoords[0], routeCoords[0])
+            routeCoords.forEach((coord) => bounds.extend(latLng(coord)))
+            map.fitBounds(bounds as LatLngBoundsExpression)
+        } else {
+            map.setView(defaultLatLng, zoom)
+        }
+        return null
+    }
+
     return (
         <div>
             <MapContainer
                 id="mapId"
-                center={routeCoords ? routeCoords[0] : defaultLatLng}
-                zoom={routeCoords ? zoom : zoom}
+                center={defaultLatLng}
+                zoom={zoom}
                 style={{ height: '100vh', width: '100vw' }}
             >
+                <AdjustMapView/>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
