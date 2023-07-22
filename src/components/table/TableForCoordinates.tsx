@@ -2,8 +2,8 @@ import React, {FC} from 'react';
 import {Table} from 'antd';
 import {columns, dataSource, RouteDataType} from "../../common/data-set";
 import {useAppDispatch, useAppSelector} from "../../store/config/hook/hook";
-import {getRoutsAC} from "../../store/slices/routeSlice";
 import s from "./TableForCoordinates.module.css"
+import {getRoutsAC} from "../../store/sagas/actionCreater/action";
 
 export const TableForCoordinates: FC = () => {
 

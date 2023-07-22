@@ -6,7 +6,6 @@ import {useAppSelector} from "../../store/config/hook/hook";
 
 export const RouteMap: FC = () => {
 
-
     const selectedRoute = useAppSelector(state => state.routes.selectedRoute)
     const routeStyle = {
         color: 'blue',

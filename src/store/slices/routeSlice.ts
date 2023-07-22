@@ -1,7 +1,5 @@
-import {createAction, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RouteDataType} from "../../common/data-set";
-import {ResponseDataType, routerAPI} from "../../api/api";
-import {put} from "redux-saga/effects";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {ResponseDataType} from "../../api/api";
 
 interface initialStateType {
     selectedRoute: ResponseDataType | null
@@ -9,17 +7,6 @@ interface initialStateType {
 
 const initialState: initialStateType = {
     selectedRoute: null
-}
-
-export function* getRouteSagaWorker(action: PayloadAction<RouteDataType>): any {
-    try {
-        const res: ResponseDataType = yield routerAPI.getRoute(action.payload)
-        const payload = res
-        yield put(getRouteSuccess(payload))
-        console.log(payload)
-    } catch (e) {
-        console.log(e)
-    }
 }
 
 const routeSlice = createSlice({
@@ -32,8 +19,6 @@ const routeSlice = createSlice({
     }
 })
 
-export const GET_ROUTS = "/getRouts"
-export const getRoutsAC = createAction<RouteDataType | null>(GET_ROUTS)
 
 export const {getRouteSuccess} = routeSlice.actions
 export default routeSlice.reducer
