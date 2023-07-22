@@ -1,61 +1,54 @@
-import React from 'react';
-import {MapContainer, Marker, Polyline, TileLayer, useMap} from 'react-leaflet';
-import {latLng, latLngBounds, LatLngBoundsExpression, LatLngExpression, LatLngTuple} from 'leaflet';
-import {RouteData} from "../table/TableForCoordinates";
+import React, {FC} from 'react';
+import {MapContainer, Marker, Polyline, TileLayer} from 'react-leaflet';
+import {LatLngTuple} from 'leaflet';
+import {useAppSelector} from "../../store/config/hook/hook";
 
-interface IRouteMap {
-    selectedRoute: RouteData | null
-}
 
-export const RouteMap: React.FC<IRouteMap> = ({ selectedRoute }) => {
-    const defaultLatLng: LatLngTuple = [59.84660399, 30.29496392]
-    const zoom: number = 13
+export const RouteMap: FC = () => {
 
-    const routeCoords: LatLngTuple[] | null =
-        selectedRoute && selectedRoute.key
-            ? [
-                selectedRoute.point1.split(',').map((coord) => parseFloat(coord.trim())) as LatLngTuple,
-                selectedRoute.point2.split(',').map((coord) => parseFloat(coord.trim())) as LatLngTuple,
-                selectedRoute.point3.split(',').map((coord) => parseFloat(coord.trim())) as LatLngTuple,
-            ]
-            : null
 
+    const selectedRoute = useAppSelector(state => state.routes.selectedRoute)
     const routeStyle = {
         color: 'blue',
-        weight: 2,
+        weight: 3,
     }
 
-    const AdjustMapView = () => {
-        const map = useMap()
-        if (routeCoords && routeCoords.length > 0) {
-            const bounds = latLngBounds(routeCoords[0], routeCoords[0])
-            routeCoords.forEach((coord) => bounds.extend(latLng(coord)))
-            map.fitBounds(bounds as LatLngBoundsExpression)
-        } else {
-            map.setView(defaultLatLng, zoom)
-        }
-        return null
-    }
+    const routeCoordinates: LatLngTuple[] | null =
+        selectedRoute &&
+        selectedRoute.routes[0].geometry.coordinates.map((coord: number[]) => [coord[1], coord[0]])
+
+    // useEffect(() => {
+    //     console.log('Selected Route:', selectedRoute)
+    //     console.log('Route Coordinates:', routeCoordinates)
+    // }, [selectedRoute, routeCoordinates])
+
+    const initialPosition = selectedRoute && routeCoordinates && routeCoordinates[0]
+    const defaultLatLng: LatLngTuple = initialPosition || [59.84660399, 30.29496392]
+
+    const centerPosition: LatLngTuple = initialPosition || defaultLatLng
+    const zoomLevel = 13
 
     return (
         <div>
             <MapContainer
                 id="mapId"
-                center={defaultLatLng}
-                zoom={zoom}
+                center={centerPosition}
+                zoom={zoomLevel}
                 style={{ height: '100vh', width: '100vw' }}
             >
-                <AdjustMapView/>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                 />
-                {routeCoords && <Polyline positions={routeCoords} pathOptions={routeStyle} />}
-                {routeCoords &&
-                    routeCoords.map((coords, index) => (
-                        <Marker key={index} position={coords as LatLngExpression}>
-                           marker
-                        </Marker>
+
+                {routeCoordinates && <Polyline positions={routeCoordinates} {...routeStyle} />}
+
+                {selectedRoute &&
+                    selectedRoute.routes[0].legs[0].steps.map((step, index) => (
+                        <Marker
+                            key={index}
+                            position={[step.maneuver.location[1], step.maneuver.location[0]]}
+                        />
                     ))}
             </MapContainer>
         </div>
