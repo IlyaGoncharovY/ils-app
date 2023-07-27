@@ -1,3 +1,3 @@
 export const PATH = {
-    BASE_URL: "http://router.project-osrm.org/route/v1/driving/",
+    BASE_URL: "https://router.project-osrm.org/route/v1/driving/",
 }
