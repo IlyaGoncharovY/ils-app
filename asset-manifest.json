@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ils-app/static/css/main.16b40465.css",
-    "main.js": "/ils-app/static/js/main.546ea473.js",
+    "main.js": "/ils-app/static/js/main.f0a9ff2c.js",
     "static/js/787.a6bd8380.chunk.js": "/ils-app/static/js/787.a6bd8380.chunk.js",
     "index.html": "/ils-app/index.html",
     "main.16b40465.css.map": "/ils-app/static/css/main.16b40465.css.map",
-    "main.546ea473.js.map": "/ils-app/static/js/main.546ea473.js.map",
+    "main.f0a9ff2c.js.map": "/ils-app/static/js/main.f0a9ff2c.js.map",
     "787.a6bd8380.chunk.js.map": "/ils-app/static/js/787.a6bd8380.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.16b40465.css",
-    "static/js/main.546ea473.js"
+    "static/js/main.f0a9ff2c.js"
   ]
 }
