@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ResponseDataType} from "../../api/api";
+
+import {ResponseDataType} from "../../api/apiType";
 
 interface initialStateType {
     selectedRoute: ResponseDataType | null
@@ -18,7 +19,6 @@ const routeSlice = createSlice({
         }
     }
 })
-
 
 export const {getRouteSuccess} = routeSlice.actions
 export default routeSlice.reducer
