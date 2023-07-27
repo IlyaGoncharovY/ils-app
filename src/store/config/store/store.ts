@@ -1,9 +1,11 @@
-import {Action, configureStore, ThunkAction} from "@reduxjs/toolkit";
+import {takeEvery} from "redux-saga/effects";
 import createSagaMiddleware from "redux-saga";
-import { takeEvery } from "redux-saga/effects";
+import {Action, configureStore, ThunkAction} from "@reduxjs/toolkit";
+
+import error from "../../slices/appSlice"
 import routes from "../../slices/routeSlice"
-import {GET_ROUTS} from "../../sagas/actionCreater/action";
-import {getRouteSagaWorker} from "../../sagas/sagas";
+import {GET_ROUTS} from "../../saga/action/action";
+import {getRouteSagaWorker} from "../../saga/sagas";
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -13,7 +15,8 @@ function* sagasWatcher() {
 
 export const store = configureStore({
     reducer: {
-        routes
+        routes,
+        error
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({thunk: false}).concat(sagaMiddleware)
