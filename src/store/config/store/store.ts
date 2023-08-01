@@ -2,8 +2,8 @@ import {takeEvery} from "redux-saga/effects";
 import createSagaMiddleware from "redux-saga";
 import {Action, configureStore, ThunkAction} from "@reduxjs/toolkit";
 
-import error from "../../slices/appSlice"
-import routes from "../../slices/routeSlice"
+import error from "../../slices/app/appSlice"
+import routes from "../../slices/route/routeSlice"
 import {GET_ROUTS} from "../../saga/action/action";
 import {getRouteSagaWorker} from "../../saga/sagas";
 

@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Alert} from "antd";
 
-import {clearError} from "../../store/slices/appSlice";
+import {clearError} from "../../store/slices/app/appSlice";
 import {useAppDispatch} from "../../store/config/hook/hook";
 
 interface IErrorMessage {

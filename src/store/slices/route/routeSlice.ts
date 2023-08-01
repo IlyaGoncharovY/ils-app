@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import {ResponseDataType} from "../../api/apiType";
+import {ResponseDataType} from "../../../api/apiType";
 
 interface initialStateType {
     selectedRoute: ResponseDataType | null
